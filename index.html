@@ -88,17 +88,50 @@
     </section>
 
     <section class="section wrap" id="projects" aria-labelledby="projects-title">
-      <div class="section-heading"><p class="eyebrow">03 / Building the fundamentals</p><h2 id="projects-title">Small programs.<br>A stronger foundation.</h2></div>
-      <article class="project-feature"><div><p class="eyebrow">ENGR 102 · Engineering Lab I</p><h3>Engineering calculations in Python</h3><p>I'm learning to turn equations into programs using variables, arithmetic, and formatted output. My coursework includes engineering calculations such as Reynolds number and time-based position calculations.</p><p>The habit I'm building: understand the equation, track the units, and make the result easy to read.</p><div class="tags"><span>Python fundamentals</span><span>Engineering calculations</span><span>Problem solving</span></div></div>
-        <div class="code-panel" aria-label="Example of a beginner Python Reynolds number calculation"><div class="code-title"><span>From an equation to an answer</span><span>Python</span></div><pre><code><span class="code-comment"># Reynolds number</span>
-velocity = 9
-length = 0.875
-viscosity = 0.0015
+      <div class="section-heading"><p class="eyebrow">03 / Python & supply chains</p><h2 id="projects-title">Find the bottleneck.<br>Improve the flow.</h2></div>
+      <article class="project-feature customs-project">
+        <div>
+          <p class="eyebrow">Personal prototype · Synthetic data</p>
+          <h3>Customs workflow optimizer</h3>
+          <p>My time at Agencia Aduanal in Acuña made me curious about the paperwork behind cross-border trade. This personal Python project follows shipment files through <strong>document review, entry preparation, and client handoff</strong> to find where work piles up.</p>
+          <p>I modeled <strong>120 sample shipment files</strong> and compared <strong>9 staffing and queue plans</strong>. Document review had the longest wait. Moving one person from entry preparation to review, then prioritizing shorter ready tasks, reduced average file turnaround by <strong>40.0% in the simulation</strong>.</p>
+          <div class="project-scope" aria-label="Simulation scope"><div><strong>120</strong><span>Sample files</span></div><div><strong>9</strong><span>Plans compared</span></div><div><strong>4</strong><span>Staff in both plans</span></div></div>
+          <p class="simulation-note">Personal project using invented shipment records. The figures describe this model, with no company performance data or government clearance times included.</p>
+          <div class="tags"><span>Python</span><span>Queue simulation</span><span>Bottleneck analysis</span><span>Resource allocation</span></div>
+          <div class="project-links"><a class="text-link" href="https://github.com/MaximilianoRamon/MaximilianoRamon.github.io/blob/main/projects/customs-workflow/customs_optimizer.py" target="_blank" rel="noopener">View the working Python code <span aria-hidden="true">↗</span></a><a class="text-link" href="projects/customs-workflow/sample_shipments.csv" download>Download sample data <span aria-hidden="true">↓</span></a></div>
+        </div>
+        <div class="code-panel" aria-label="Source excerpt and measured output from the customs workflow simulation">
+          <div class="code-title"><span>customs_optimizer.py · excerpt</span><span>Python</span></div>
+          <pre tabindex="0" aria-label="Scrollable Python source excerpt"><code><span class="code-comment"># Compare the same files and 4 staff</span>
+baseline = simulate(shipments, (1, 2, 1), "fifo")
+plans = [
+    simulate(shipments, staff, rule)
+    <span class="code-keyword">for</span> staff <span class="code-keyword">in</span> allocations(total=4)
+    <span class="code-keyword">for</span> rule <span class="code-keyword">in</span> ("fifo", "shortest", "due_date")
+]
 
-reynolds = velocity * length / viscosity
-print(reynolds)</code></pre><div class="code-result"><span>OUTPUT</span><strong>5250.0</strong></div></div>
+<span class="code-comment"># Select the lowest mean turnaround</span>
+best = min(
+    plans,
+    key=<span class="code-keyword">lambda</span> p: p["avg_turnaround_min"]
+)
+reduction = 100 * (
+    1 - best["avg_turnaround_min"]
+    / baseline["avg_turnaround_min"]
+)</code></pre>
+          <div class="simulation-result"><p>SIMULATED TURNAROUND REDUCTION</p><strong>40.0<span>%</span></strong><div class="runtime-comparison"><span><b>56.0 min</b>Baseline</span><span aria-hidden="true">→</span><span><b>33.6 min</b>Selected plan</span></div><p class="run-context">120 synthetic files · Same 4-person team</p></div>
+        </div>
       </article>
-      <div class="skills"><h3>What I bring today</h3><p><strong>Languages</strong> English and Spanish · bilingual</p><p><strong>Technical foundation</strong> Introductory Python, variables, arithmetic, formatted output</p><p><strong>Earlier activities</strong> High school robotics competition team and UIL mathematics team</p></div>
+      <details class="project-details">
+        <summary>How it works, what changed, and how to reproduce it</summary>
+        <div class="project-method">
+          <div><h3>The idea in plain English</h3><p>Each file joins a queue, waits for an available person, and moves through three steps. Python jumps to the next arrival or completion and records the wait at each step.</p><p>The original staffing split was <strong>1 / 2 / 1</strong> across review, entry preparation, and handoff. The selected plan uses <strong>2 / 1 / 1</strong> and serves shorter available tasks first. It moves capacity to the busiest step while keeping the team at four people.</p><p>The program tests three staffing splits against three queue rules: first in, first out; shortest task first; and earliest due date. It selects the lowest average turnaround among those nine plans.</p></div>
+          <div class="project-table-wrap"><table class="project-table"><caption>Results on the same synthetic dataset</caption><thead><tr><th scope="col">Metric</th><th scope="col">Baseline</th><th scope="col">Selected</th></tr></thead><tbody><tr><th scope="row">Mean file turnaround</th><td>56.0 min</td><td>33.6 min</td></tr><tr><th scope="row">90th percentile turnaround</th><td>88 min</td><td>43 min</td></tr><tr><th scope="row">Mean document-review wait</th><td>27.48 min</td><td>1.65 min</td></tr><tr><th scope="row">Within sample internal deadlines</th><td>66.7%</td><td>97.5%</td></tr><tr><th scope="row">Total staff</th><td>4</td><td>4</td></tr></tbody></table></div>
+        </div>
+        <p class="model-assumptions"><strong>Model assumptions:</strong> Staff can work at any of the three steps; processing times are known; each person handles one file at a time. The model excludes inspections, transport, rework, breaks, shift closures, and the cost of moving staff. The selected plan is the best of nine tested plans on this dataset. Testing real records, estimated task times, and deadline protection would be the next step.</p>
+        <div class="project-links"><a class="text-link" href="https://github.com/MaximilianoRamon/MaximilianoRamon.github.io/blob/main/projects/customs-workflow/README.md" target="_blank" rel="noopener">Read the project walkthrough <span aria-hidden="true">↗</span></a><a class="text-link" href="projects/customs-workflow/customs_optimizer.py" download>Download the Python file <span aria-hidden="true">↓</span></a><a class="text-link" href="projects/customs-workflow/results.json" download>Download all 9 results <span aria-hidden="true">↓</span></a></div>
+      </details>
+      <div class="skills"><h3>What I bring today</h3><p><strong>Languages</strong> English and Spanish · bilingual</p><p><strong>Technical development</strong> Python coursework, with a personal project exploring simulation, CSV data, and workflow analysis</p><p><strong>Earlier activities</strong> High school robotics competition team and UIL mathematics team</p></div>
     </section>
 
     <section class="section wrap golf-section" id="golf" aria-labelledby="golf-title">

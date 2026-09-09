@@ -20,3 +20,7 @@ GitHub Pages publishes the root directory of the `main` branch. Keep **Settings 
 - Replace photos and the résumé in `assets/` as needed.
 
 The Archivo font is included with its license in `assets/Archivo-LICENSE.txt`.
+
+## Python project
+
+The [customs workflow optimizer](projects/customs-workflow/README.md) includes a runnable Python simulation, 120 synthetic shipment records, nine scenario results, and checks against hand-calculated examples. Its simulated results are presented in the portfolio's Projects section.

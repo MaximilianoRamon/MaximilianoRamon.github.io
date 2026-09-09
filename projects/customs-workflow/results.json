@@ -1,0 +1,208 @@
+{
+  "data_type": "synthetic",
+  "seed": 2026,
+  "shipment_count": 120,
+  "staff_count": 4,
+  "scenario_count": 9,
+  "objective": "Lowest mean file turnaround among the nine tested plans",
+  "bottleneck": "Document review",
+  "baseline": {
+    "staffing": [
+      1,
+      2,
+      1
+    ],
+    "rule": "fifo",
+    "avg_turnaround_min": 55.99166666666667,
+    "p90_turnaround_min": 88,
+    "avg_wait_min_by_stage": {
+      "Document review": 27.483333333333334,
+      "Entry preparation": 0,
+      "Client handoff": 0
+    },
+    "late_files": 40,
+    "on_time_pct": 66.66666666666667
+  },
+  "best": {
+    "staffing": [
+      2,
+      1,
+      1
+    ],
+    "rule": "shortest",
+    "avg_turnaround_min": 33.583333333333336,
+    "p90_turnaround_min": 43,
+    "avg_wait_min_by_stage": {
+      "Document review": 1.65,
+      "Entry preparation": 3.425,
+      "Client handoff": 0
+    },
+    "late_files": 3,
+    "on_time_pct": 97.5
+  },
+  "reduction_pct": 40.020836433993146,
+  "scenarios": [
+    {
+      "staffing": [
+        2,
+        1,
+        1
+      ],
+      "rule": "shortest",
+      "avg_turnaround_min": 33.583333333333336,
+      "p90_turnaround_min": 43,
+      "avg_wait_min_by_stage": {
+        "Document review": 1.65,
+        "Entry preparation": 3.425,
+        "Client handoff": 0
+      },
+      "late_files": 3,
+      "on_time_pct": 97.5
+    },
+    {
+      "staffing": [
+        2,
+        1,
+        1
+      ],
+      "rule": "due_date",
+      "avg_turnaround_min": 33.641666666666666,
+      "p90_turnaround_min": 43,
+      "avg_wait_min_by_stage": {
+        "Document review": 1.65,
+        "Entry preparation": 3.4833333333333334,
+        "Client handoff": 0
+      },
+      "late_files": 2,
+      "on_time_pct": 98.33333333333333
+    },
+    {
+      "staffing": [
+        2,
+        1,
+        1
+      ],
+      "rule": "fifo",
+      "avg_turnaround_min": 33.68333333333333,
+      "p90_turnaround_min": 45,
+      "avg_wait_min_by_stage": {
+        "Document review": 1.65,
+        "Entry preparation": 3.525,
+        "Client handoff": 0
+      },
+      "late_files": 3,
+      "on_time_pct": 97.5
+    },
+    {
+      "staffing": [
+        1,
+        2,
+        1
+      ],
+      "rule": "shortest",
+      "avg_turnaround_min": 52.38333333333333,
+      "p90_turnaround_min": 102,
+      "avg_wait_min_by_stage": {
+        "Document review": 23.875,
+        "Entry preparation": 0,
+        "Client handoff": 0
+      },
+      "late_files": 28,
+      "on_time_pct": 76.66666666666667
+    },
+    {
+      "staffing": [
+        1,
+        1,
+        2
+      ],
+      "rule": "shortest",
+      "avg_turnaround_min": 52.45,
+      "p90_turnaround_min": 102,
+      "avg_wait_min_by_stage": {
+        "Document review": 23.875,
+        "Entry preparation": 0.06666666666666667,
+        "Client handoff": 0
+      },
+      "late_files": 28,
+      "on_time_pct": 76.66666666666667
+    },
+    {
+      "staffing": [
+        1,
+        2,
+        1
+      ],
+      "rule": "due_date",
+      "avg_turnaround_min": 55.93333333333333,
+      "p90_turnaround_min": 92,
+      "avg_wait_min_by_stage": {
+        "Document review": 27.425,
+        "Entry preparation": 0,
+        "Client handoff": 0
+      },
+      "late_files": 37,
+      "on_time_pct": 69.16666666666667
+    },
+    {
+      "staffing": [
+        1,
+        2,
+        1
+      ],
+      "rule": "fifo",
+      "avg_turnaround_min": 55.99166666666667,
+      "p90_turnaround_min": 88,
+      "avg_wait_min_by_stage": {
+        "Document review": 27.483333333333334,
+        "Entry preparation": 0,
+        "Client handoff": 0
+      },
+      "late_files": 40,
+      "on_time_pct": 66.66666666666667
+    },
+    {
+      "staffing": [
+        1,
+        1,
+        2
+      ],
+      "rule": "due_date",
+      "avg_turnaround_min": 56,
+      "p90_turnaround_min": 92,
+      "avg_wait_min_by_stage": {
+        "Document review": 27.425,
+        "Entry preparation": 0.06666666666666667,
+        "Client handoff": 0
+      },
+      "late_files": 37,
+      "on_time_pct": 69.16666666666667
+    },
+    {
+      "staffing": [
+        1,
+        1,
+        2
+      ],
+      "rule": "fifo",
+      "avg_turnaround_min": 56.025,
+      "p90_turnaround_min": 88,
+      "avg_wait_min_by_stage": {
+        "Document review": 27.483333333333334,
+        "Entry preparation": 0.03333333333333333,
+        "Client handoff": 0
+      },
+      "late_files": 40,
+      "on_time_pct": 66.66666666666667
+    }
+  ],
+  "assumptions": [
+    "All records, durations, and internal deadlines are invented.",
+    "Four staff are fully cross-trained and each works on one file at a time.",
+    "Each file visits review, entry preparation, and client handoff in order.",
+    "Processing times are known exactly; real deployments would need estimates.",
+    "No interruptions, rework, breaks, shift closures, or reassignment costs.",
+    "No government inspections, border queues, transport times, or clearance decisions.",
+    "Best means best of nine tested plans on this one dataset; no global guarantee."
+  ]
+}
